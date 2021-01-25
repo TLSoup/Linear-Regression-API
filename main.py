@@ -17,7 +17,6 @@ class ListingModel(db.Model):
     def __repr__(self):
         return f"Listing( cost = {cost}, sqft = {sqft}, bdrms = {bdrms}, pool = {pool})"
 
-
 #Only run once with this, or it will create the db a second time and delete current db.
 #db.create_all()
 
@@ -94,8 +93,10 @@ class Listing(Resource):
         if not result:
             abort(404, message=("Could not find listing with that id"))
         listing = ListingModel(id= listing_id, cost=args['cost'], sqft=args['sqft'], bdrms=args['bdrms'], pool=args['pool'])
+        
         db.session.delete(listing)
         db.session.commit()
+        
         return 204, "Listing has been deleted"
 
 api.add_resource(Listing, "/listing/<int:listing_id>")
