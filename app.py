@@ -7,7 +7,7 @@ from sklearn.metrics import mean_squared_error, r2_score
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
+def app():
     return 
 # Load the diabetes dataset
 diabetes_X, diabetes_y = datasets.load_diabetes(return_X_y=True)
