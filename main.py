@@ -38,7 +38,6 @@ listing_delete_args.add_argument("bdrms")
 listing_delete_args.add_argument("sqft")
 listing_delete_args.add_argument("pool")
 
-
 resource_fields = {
     'id': fields.Integer,
     'cost': fields.Integer,
@@ -50,7 +49,7 @@ resource_fields = {
 class Listing(Resource):
     @marshal_with(resource_fields)
     def get(self, listing_id):
-        result = ListingModel.query.filter_by(id= listing_id).first()
+        result = ListingModel.query.all()
         if not result:
             abort(404, message=("Could not find listing with that id"))
         return result
@@ -99,7 +98,11 @@ class Listing(Resource):
         
         return 204, "Listing has been deleted"
 
-api.add_resource(Listing, "/listing/<int:listing_id>")
+api.add_resource(Listing, "/api/listing/<int:listing_id>")
+
+@app.route("/")
+def index():
+    return 'index'
 
 if __name__ == "__main__":
     app.run(debug=True)
