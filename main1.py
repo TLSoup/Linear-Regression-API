@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Api, Resource
@@ -72,6 +72,10 @@ class ListingResource(Resource):
 
 api.add_resource(ListingListResource, '/listings')
 api.add_resource(ListingResource, '/listings/<int:listing_id>')
+
+@app.route("/")
+def index():
+    return render_template('index.html')
 
 if __name__ == '__main__':
     app.run(debug=True)
