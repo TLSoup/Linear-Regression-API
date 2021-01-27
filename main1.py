@@ -3,7 +3,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Api, Resource
 
-import linear_regression as linear_regression
+import linear_regression as regression
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///listings.db'
@@ -29,7 +29,6 @@ listings_schema = ListingSchema(many=True)
 class ListingListResource(Resource):
     def get(self):
         listings = Listing.query.all()
-        linear_regression
         return listings_schema.dump(listings)
 
     def post(self):
@@ -39,6 +38,7 @@ class ListingListResource(Resource):
             bdrms=request.json['bdrms'],
             pool=request.json['pool']
         )
+        regression
         db.session.add(new_listing)
         db.session.commit()
         return listing_schema.dump(new_listing)

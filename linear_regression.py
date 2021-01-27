@@ -37,3 +37,4 @@ def regression():
     # The coefficient of determination: 1 is perfect prediction
     print('Coefficient of determination: %.2f'
       % r2_score(Cost_Y_test, Cost_Y_pred))
+    print('Hello')
