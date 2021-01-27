@@ -38,7 +38,7 @@ class ListingListResource(Resource):
             bdrms=request.json['bdrms'],
             pool=request.json['pool']
         )
-        regression
+        regression()
         db.session.add(new_listing)
         db.session.commit()
         return listing_schema.dump(new_listing)
