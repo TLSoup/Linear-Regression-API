@@ -2,10 +2,13 @@ from sklearn import linear_model
 from sklearn.metrics import mean_squared_error, r2_score
 import response
 
-def regression():
+"""
+@param listings is and array of Listing objects
+"""
+def regression(listings):
     House_X = []
     Cost_Y = []
-    for row in response.json():
+    for row in listings:
         House_X.append([row['sqft'], row['bdrms'], row['pool']])
         Cost_Y.append(row['cost'])
     
@@ -37,4 +40,3 @@ def regression():
     # The coefficient of determination: 1 is perfect prediction
     print('Coefficient of determination: %.2f'
       % r2_score(Cost_Y_test, Cost_Y_pred))
-    print('Hello')

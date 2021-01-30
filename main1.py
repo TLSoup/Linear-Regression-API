@@ -2,6 +2,7 @@ from flask import Flask, request, render_template
 from flask_sqlalchemy import SQLAlchemy
 from flask_marshmallow import Marshmallow
 from flask_restful import Api, Resource
+import json
 
 import linear_regression as regression
 
@@ -32,16 +33,20 @@ class ListingListResource(Resource):
         return listings_schema.dump(listings)
 
     def post(self):
-        new_listing = Listing(
-            cost=request.json['cost'],
-            sqft=request.json['sqft'],
-            bdrms=request.json['bdrms'],
-            pool=request.json['pool']
-        )
-        regression()
-        db.session.add(new_listing)
-        db.session.commit()
-        return listing_schema.dump(new_listing)
+        """
+        TODO: validate that data is an array of objects by inspecting the output of the print statement below
+        """
+        data = request.json()
+        print(data)
+        new_listings = [Listing(x.cost, x.sqft, x.bdrms, x.pool) for x in data]
+        
+        # TODO: regression should return the values that are stated in the README
+        return_data = regression(new_listings)
+        print(return_data)
+        # db.session.add(new_listing)
+        # db.session.commit()
+        # TODO: regresstion
+        return listing_schema.jsonify(return_data)
 
 class ListingResource(Resource):
     def get(self, listing_id):
