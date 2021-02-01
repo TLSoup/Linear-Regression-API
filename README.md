@@ -1,4 +1,4 @@
-# EI-Interview
+# Linear Regression API
 
 Set up a restful API on a local webserver that performs linear regression using an artificial neural network on the following dataset to generate a cost estimation function from a set of (cost, test sample) pairs shown below:
 
