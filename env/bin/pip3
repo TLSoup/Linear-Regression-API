@@ -1,4 +1,4 @@
-#!/Users/tracyarray/projects/ei/EI-Interview/env/bin/python3
+#!/Users/tracyarray/projects/ei/ei_interview/env/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
